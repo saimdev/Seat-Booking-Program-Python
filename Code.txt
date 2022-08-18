@@ -1,0 +1,207 @@
+print("\t'Seat Reservation Program'")
+print("")
+availible_seats = ast = [1,2,3,4,5,6,7,8,9,10,11,12]
+seats_reserved = sr = []
+passengers = p = []
+age = []
+nationality = []
+
+while 1:
+    print("Already Reserved Seat number")
+    print(sr)
+    print("")
+    print("Availible Seats")
+    print(ast)
+    print("")
+    print("1. To Add")
+    print("2. To Search")
+    print("3. To Delete")
+    print("4. To Print all Records")
+    option = int(input("Enter any option: "))
+    print("")
+    
+    if option == 1:
+        if len(sr) <= 11:
+            seat_number = int(input("Enter Seat number(1-12): "))
+            if seat_number <= 0 or seat_number >12:
+                print("Enter Valid seat number (1-12)")
+            else:
+                if seat_number in sr:
+                    print("Seat is already reserved")
+                    print("")
+                else:
+                    sr.append(seat_number)
+                    delete_ast = ast.remove(seat_number)
+                    ast.sort()
+                    name = n = input("Enter tourist name: ").upper()
+                    #if name in passengers:
+                     #   print("Already Registered with same name")
+                      #  print("")
+                    #else:
+                    passengers.append(name)
+                    age_of_pass = a = int(input("Enter Age: "))
+                    age.append(age_of_pass)
+                    nationality_of_pass = nat = input("Enter Nationality: ").upper()
+                    nationality.append(nat)
+                    print("")
+        else:
+            print("All seats are resrved")
+            print("")
+    elif option == 2:
+        print("""Name(N)
+Seat(S)""")
+        option_search = input("You want to search with seat number or name? (N/S)").upper()
+        if option_search == "N":
+            name_search = ns = input("Enter name to search: ").upper()
+            
+            if name_search in passengers:
+                index_of_seatn = index_of_age = index_of_nation = passengers.index(name_search)
+                seat_no = sr[index_of_seatn]
+                age_ele = age[index_of_age]
+                nation_ele = nationality[index_of_nation]
+                print("")
+                print("Name: ","\t\t",name_search)
+                print("Age: ","\t\t",age_ele)
+                print("Seat no.: ","\t",seat_no)
+                print("Nationality: ","\t",nation_ele)
+                print("")
+                delete_name = passengers.pop(index_of_seatn)
+                delete_seat = sr.pop(index_of_seatn)
+                delete_age = age.pop(index_of_age)
+                delete_nationality = nationality.pop(index_of_nation)
+                if name_search in passengers:
+                    index = passengers.index(name_search)
+                    seat_no1 = sr[index]
+                    age_ele1 = age[index]
+                    nation_ele1 = nationality[index]
+                    print("")
+                    print("Name: ","\t\t",name_search)
+                    print("Age: ","\t\t",age_ele1)
+                    print("Seat no.: ","\t",seat_no1)
+                    print("Nationality: ","\t",nation_ele1)
+                    print("")
+                    add_name = passengers.insert(index_of_seatn, name_search)
+                    add_age = age.insert(index_of_age, age_ele)
+                    add_seat = sr.insert(index_of_seatn, seat_no)
+                    add_nationality = nationality.insert(index_of_nation, nation_ele)
+                else:
+                    add_name = passengers.insert(index_of_seatn, name_search)
+                    add_age = age.insert(index_of_age, age_ele)
+                    add_seat = sr.insert(index_of_seatn, seat_no)
+                    add_nationality = nationality.insert(index_of_nation, nation_ele)
+            else:
+                print("No Record Found")
+                print("")
+        elif option_search == "S":
+            seat_search = ss = int(input("Enter seat no. to search: "))
+            if seat_search in sr:
+                index_of_name = index_of_nation1 = index_of_age1 = sr.index(ss)
+                name_search1 = passengers[index_of_name]
+                age_ele1 = age[index_of_age1]
+                nation_ele1 = nationality[index_of_nation1]
+                print("")
+                print("Name: ","\t\t",name_search1)
+                print("Age: ","\t\t",age_ele1)
+                print("Seat no.: ","\t",ss)
+                print("Nationality: ","\t",nation_ele1)
+                print("")
+            else:
+                print("No Record Found")
+                print("")
+        else:
+            print("Choose the correct option (N/S)")
+    elif option == 3:
+        print("Name(N)")
+        print("Seat(S)")
+        option_search = input("You want to delete through seat number or name? (N/S)").upper()
+        if option_search == "N":
+            to_delete = input("Of which tourist you want to delete data: ").upper()
+            if to_delete in passengers:
+                index = passengers.index(to_delete)
+                age_ele1 = age[index]
+                nation_ele1 = nationality[index]
+                delete = d = passengers.pop(index)
+                ss = sr[index]
+                print("")
+                print("Name: ","\t\t",to_delete)
+                print("Age: ","\t\t",age_ele1)
+                print("Seat no.: ","\t",ss)
+                print("Nationality: ","\t",nation_ele1)
+                print("")
+                confirm = input("Do you want to delete his/her record (Y/N): ").upper()
+                if confirm == "Y":
+                    add = passengers.insert(index, to_delete)
+                    remove = r = passengers.remove(delete)
+                    avlble_seat = sr[index]
+                    add_deleted_seat = ast.append(avlble_seat)
+                    del sr[index]
+                    del age[index]
+                    del nationality[index]
+                    ast.sort()
+                    print("Done!")
+                    print("")
+                elif confirm == "N":
+                    add = passengers.insert(index, to_delete)
+                    print("Okay!")
+                    print("")
+            else:
+                print("No record Found!")
+                print("")
+        elif option_search == "S":
+            seat_search = ss = int(input("Of which Seat No. you want to delete record: "))
+            if seat_search in sr:
+                index = sr.index(ss)
+                age_ele1 = age[index]
+                nation_ele1 = nationality[index]
+                name1 = passengers[index]
+                delete1 = d1 = sr.pop(index)
+                print("")
+                print("Name: ","\t\t",name1)
+                print("Age: ","\t\t",age_ele1)
+                print("Seat no.: ","\t",ss)
+                print("Nationality: ","\t",nation_ele1)
+                print("")
+                confirm = input("Do you want to delete his/her record (Y/N): ").upper()
+                if confirm == "Y":
+                    add = sr.insert(index, d1)
+                    avlble_seat = sr[index]
+                    add_deleted_seat = ast.append(avlble_seat)
+                    del sr[index]
+                    del p[index]
+                    del age[index]
+                    del nationality[index]
+                    ast.sort()
+                    print("Done!")
+                    print("")
+                elif confirm == "N":
+                    add = sr.insert(index, ss)
+                    print("Okay!")
+                    print("")
+            else:
+                print("No Record Found!")
+        else:
+            print("Choose the correct Option")
+    elif option == 4:
+        if len(p)== 0 and len(sr)== 0 and len(age)== 0 and len(nationality)== 0:
+            print("Sr. | Name                | Age |  Seat No. |  Nationality")
+            print("----------------------------------------------------------")
+            print("\t\t'No Record Found'")
+            print("")
+        else:    
+            x = len(p)
+            y = 0
+            print("Sr. | Name                | Age |  Seat No. |  Nationality")
+            print("----------------------------------------------------------")
+            while x>y:
+                print(f'{y+1:<3} | {p[y]:<19} | {age[y]:<2}  |    {sr[y]:<2}     |  {nationality[y]:<10}')
+                y+=1
+                print("")
+            print("\t\t'End of record'")
+            print("")
+            
+    else:
+        print("Enter Valid Option")
+
+            
+        
+    
